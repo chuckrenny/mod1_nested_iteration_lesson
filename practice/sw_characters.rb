@@ -1,3 +1,7 @@
+
+
+
+
 characters = [
     {
         "name": "Luke Skywalker",
@@ -208,25 +212,34 @@ characters = [
         ],
     }
 ]
-
-
 # Challenge #1 
-
 # Get a unique list of the homeworlds
 
 # ["Tatooine", "Naboo", "Alderaan" ... ]
 
+homeworlds = []
+
+characters.each do |obj|
+    homeworlds.push(obj[:homeworld])
+end
+
+# p '1', homeworlds.uniq
 
 # Challenge #2
-
 # Get a list of the characters who have starships
 
 # ["Luke Skywalker", "Darth Vader", "Biggs Darklighter" ... ]
+starships = []
 
+characters.each do |obj|
+    if !obj[:starships].empty?
+        starships.push(obj[:name])
+    end
+end
 
+# p '2', starships
 
 # CHALLENGE #3
-
 # Create a new hash such that each character points to their collection of starships: 
 
 # {
@@ -239,9 +252,15 @@ characters = [
 #     ...
 # }
 
+character_starships = {}
+
+characters.each do |obj|
+    character_starships[obj[:name]] = obj[:starships]
+end
+
+# p '3', character_starships
 
 # Challenge #4 
-
 # Create a new hash such that each movie points to a collection of characters 
 
 # {
@@ -251,3 +270,28 @@ characters = [
 #      ...
 #      ...
 # }
+movie_characters = {}
+
+characters.each do |obj|
+    obj[:films].each do |movie|
+        # if movie isn't a key, then create a key
+        if !movie_characters.key?(movie)
+            movie_characters[movie] = [obj[:name]]
+        # else if movie is a key then push the name
+        else
+            movie_characters[movie].push(obj[:name])
+        end
+    end
+end
+
+p '4', movie_characters
+
+
+
+
+
+
+
+
+
+
